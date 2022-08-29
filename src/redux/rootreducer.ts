@@ -1,3 +1,4 @@
+import { repoReducer, repoReducerName } from './slices/features/repo/repoSlice';
 import {
   searchReducer,
   searchReducerName,
@@ -5,6 +6,7 @@ import {
 
 const rootReducer = {
   [searchReducerName]: searchReducer,
+  [repoReducerName]: repoReducer,
 };
 
 export default rootReducer;

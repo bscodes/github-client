@@ -1,3 +1,4 @@
+import { ApolloError } from '@apollo/client';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../../store';
 
@@ -5,9 +6,11 @@ export interface ISearchResult {
   node: {
     id: string;
     name: string | null;
+    login: string | null;
     avatarUrl: string;
     repositories: {
       totalCount: number;
+      edges: IUserRepositories[];
     };
     starredRepositories: {
       totalCount: number;
@@ -15,14 +18,35 @@ export interface ISearchResult {
   };
 }
 
+export interface IUserRepositories {
+  node: {
+    name: string | null;
+    watchers: {
+      totalCount: number;
+    };
+    stargazers: {
+      totalCount: number;
+    };
+    id: string;
+  };
+}
+
 export interface SearchState {
   searchResult: ISearchResult[] | null;
   searchQuery: string;
+  loading: boolean;
+  error: ApolloError | null;
+  userRepositories: IUserRepositories[] | null;
+  selectedUser: string | null;
 }
 
 const initialState: SearchState = {
   searchResult: null,
   searchQuery: '',
+  loading: false,
+  error: null,
+  userRepositories: null,
+  selectedUser: null,
 };
 
 export const searchSlice = createSlice({
@@ -31,7 +55,7 @@ export const searchSlice = createSlice({
   reducers: {
     setSearchResult: (
       state: SearchState,
-      action: PayloadAction<ISearchResult[]>
+      action: PayloadAction<ISearchResult[] | null>
     ) => {
       return {
         ...state,
@@ -44,10 +68,50 @@ export const searchSlice = createSlice({
         searchQuery: action.payload,
       };
     },
+    setLoading: (state: SearchState, action: PayloadAction<boolean>) => {
+      return {
+        ...state,
+        loading: action.payload,
+      };
+    },
+    setError: (
+      state: SearchState,
+      action: PayloadAction<ApolloError | null>
+    ) => {
+      return {
+        ...state,
+        error: action.payload,
+      };
+    },
+    setUserRepositories: (
+      state: SearchState,
+      action: PayloadAction<IUserRepositories[] | null>
+    ) => {
+      return {
+        ...state,
+        userRepositories: action.payload,
+      };
+    },
+    setSelectedUser: (
+      state: SearchState,
+      action: PayloadAction<string | null>
+    ) => {
+      return {
+        ...state,
+        selectedUser: action.payload,
+      };
+    },
   },
 });
 
-export const { setSearchResult, setSearchQuery } = searchSlice.actions;
+export const {
+  setSearchResult,
+  setSearchQuery,
+  setError,
+  setLoading,
+  setUserRepositories,
+  setSelectedUser,
+} = searchSlice.actions;
 export const searchReducerName = searchSlice.name;
 export const searchReducer = searchSlice.reducer;
 export const searchSelector = (state: RootState) => state[searchSlice.name];
