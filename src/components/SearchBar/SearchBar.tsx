@@ -1,4 +1,5 @@
 import React, { ChangeEvent, FC, FormEvent } from 'react';
+import { BiSearchAlt } from 'react-icons/bi';
 
 interface ISearchBarProps {
   onSearch: (e: FormEvent<HTMLFormElement>) => void;
@@ -12,22 +13,18 @@ const SearchBar: FC<ISearchBarProps> = ({
   onInputChange,
 }) => {
   return (
-    <form onSubmit={onSearch} className="mx-auto w-1/3 flex">
+    <form onSubmit={onSearch} className="flex relative">
+      <div className="absolute md:top-3 top-5 left-3 scale-50 h-4">
+        <BiSearchAlt color="#717079" className="text-2xl md:text-base" />
+      </div>
       <input
         id="user"
         type="text"
-        className="w-full h-8 px-2 rounded-xl border-none dark:bg-slate-600"
+        className="w-full h-14 md:h-8 pl-12 md:pl-8 pr-2 rounded-2xl md:rounded-xl border-solid dark:border-lightdark dark:bg-lightdark text-2xl md:text-base"
         value={searchQuery}
         onChange={onInputChange}
-        placeholder="Search users..."
+        placeholder="Search"
       />
-      <button
-        type="submit"
-        className="bg-sky-500 border-none px-3 h-9 text-white cursor-pointer"
-        disabled={!searchQuery.length}
-      >
-        Search
-      </button>
     </form>
   );
 };

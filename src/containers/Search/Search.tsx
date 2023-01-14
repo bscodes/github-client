@@ -34,11 +34,13 @@ const Search = () => {
     e.stopPropagation();
     dispatch(setUserRepositories(null));
     navigate('/');
-    getUsers({
-      variables: {
-        searchQuery,
-      },
-    });
+    if (searchQuery.length) {
+      getUsers({
+        variables: {
+          searchQuery,
+        },
+      });
+    }
   };
 
   useEffect(() => {

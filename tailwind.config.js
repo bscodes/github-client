@@ -7,7 +7,16 @@ module.exports = {
   theme: {
     extend: {
       backgroundColor: {
-        dark: '#343437'
+        dark: '#343437',
+        lightdark: '#29282B'
+      },
+      borderColor: {
+        dark: '#343437',
+        lightdark: '#29282B'
+      },
+      color: {
+        dark: '#343437',
+        lightdark: '#29282B'
       }
     },
   },
