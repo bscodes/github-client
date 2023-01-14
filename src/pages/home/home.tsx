@@ -4,9 +4,8 @@ import UserList from '../../containers/User/UserList';
 
 const Home: FC = () => {
   return (
-    <div className="flex flex-col gap-3 px-32">
+    <div className="flex flex-col gap-3 px-0 md:px-32">
       <UserList />
-      <hr />
       <RepoList />
     </div>
   );
