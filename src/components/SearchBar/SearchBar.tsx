@@ -16,7 +16,7 @@ const SearchBar: FC<ISearchBarProps> = ({
       <input
         id="user"
         type="text"
-        className="w-full h-8 px-2 rounded-none border-black border"
+        className="w-full h-8 px-2 rounded-xl border-none dark:bg-slate-600"
         value={searchQuery}
         onChange={onInputChange}
         placeholder="Search users..."

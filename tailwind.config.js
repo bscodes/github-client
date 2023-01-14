@@ -3,8 +3,13 @@ module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
+  darkMode: "class",
   theme: {
-    extend: {},
+    extend: {
+      backgroundColor: {
+        dark: '#343437'
+      }
+    },
   },
   plugins: [],
 }
