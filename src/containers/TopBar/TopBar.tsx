@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import Search from '../Search/Search';
 import {
+  setSearchQuery,
   setSearchResult,
   setUserRepositories,
 } from '../../redux/slices/features/search/searchSlice';
@@ -13,6 +14,7 @@ const TopBar: React.FC = () => {
   const onReturnHome: () => void = () => {
     dispatch(setSearchResult(null));
     dispatch(setUserRepositories(null));
+    dispatch(setSearchQuery(''));
   };
 
   return (

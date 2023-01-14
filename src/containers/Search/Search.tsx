@@ -46,7 +46,6 @@ const Search = () => {
   useEffect(() => {
     if (searchResult?.search?.edges) {
       dispatch(setSearchResult(searchResult?.search?.edges));
-      dispatch(setSearchQuery(''));
     }
 
     return () => {
