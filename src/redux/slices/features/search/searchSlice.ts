@@ -1,6 +1,6 @@
+import { RootState } from '@/redux/store';
 import { ApolloError } from '@apollo/client';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../../../store';
 
 export interface ISearchResult {
   node: {
@@ -36,6 +36,7 @@ export interface SearchState {
   searchQuery: string;
   loading: boolean;
   error: ApolloError | null;
+  isSubmit: boolean;
   userRepositories: IUserRepositories[] | null;
   selectedUser: string | null;
 }
@@ -45,6 +46,7 @@ const initialState: SearchState = {
   searchQuery: '',
   loading: false,
   error: null,
+  isSubmit: false,
   userRepositories: null,
   selectedUser: null,
 };
@@ -53,6 +55,12 @@ export const searchSlice = createSlice({
   name: 'search',
   initialState,
   reducers: {
+    setIsSubmit: (state: SearchState, action: PayloadAction<boolean>) => {
+      return {
+        ...state,
+        isSubmit: action.payload,
+      };
+    },
     setSearchResult: (
       state: SearchState,
       action: PayloadAction<ISearchResult[] | null>
@@ -109,6 +117,7 @@ export const {
   setSearchQuery,
   setError,
   setLoading,
+  setIsSubmit,
   setUserRepositories,
   setSelectedUser,
 } = searchSlice.actions;

@@ -1,11 +1,11 @@
 import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Repo from '../../components/Repo/Repo';
-import { useAppSelector } from '../../utils/hooks/typedSelectors';
+import Repo from '@/components/Repo/Repo';
+import { useAppSelector } from '@/utils/hooks/typedSelectors';
 import {
   IUserRepositories,
   searchSelector,
-} from '../../redux/slices/features/search/searchSlice';
+} from '@/redux/slices/features/search/searchSlice';
 
 const RepoList: FC = () => {
   const searchState = useAppSelector(searchSelector);

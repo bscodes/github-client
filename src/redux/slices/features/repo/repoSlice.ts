@@ -1,11 +1,10 @@
+import { RootState } from '@/redux/store';
 import {
   createSlice,
   PayloadAction,
   Slice,
   SliceCaseReducers,
 } from '@reduxjs/toolkit';
-import { RootState } from '../../../store';
-
 export interface IIssue {
   createdAt: string;
   number: number;

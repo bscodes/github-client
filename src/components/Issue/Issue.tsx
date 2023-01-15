@@ -1,6 +1,6 @@
 import moment from 'moment';
 import { FC } from 'react';
-import { IIssue } from '../../redux/slices/features/repo/repoSlice';
+import { IIssue } from '@/redux/slices/features/repo/repoSlice';
 
 interface IIssueProps {
   issue: IIssue;

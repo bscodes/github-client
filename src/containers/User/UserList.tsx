@@ -1,16 +1,13 @@
 import { FC } from 'react';
-import User from '../../components/User/User';
-import {
-  useAppDispatch,
-  useAppSelector,
-} from '../../utils/hooks/typedSelectors';
+import User from '@/components/User/User';
+import { useAppDispatch, useAppSelector } from '@/utils/hooks/typedSelectors';
 import {
   ISearchResult,
   IUserRepositories,
   searchSelector,
   setSelectedUser,
   setUserRepositories,
-} from '../../redux/slices/features/search/searchSlice';
+} from '@/redux/slices/features/search/searchSlice';
 
 const UserList: FC = () => {
   const searchState = useAppSelector(searchSelector);
@@ -26,25 +23,34 @@ const UserList: FC = () => {
   };
 
   return (
-    <>
+    <div className="mx-auto px-6 md:px-10">
       {loading && <h3 className="text-center">Loading...</h3>}
       {error && <h3 className="text-center">{error?.message}</h3>}
+      {searchResult?.length && (
+        <>
+          <h3 className="font-thin mb-9">{searchResult?.length} users</h3>
+          <hr className="w-full border-gray-400 dark:border-gray-800 opacity-10 dark:opacity-30 mb-8" />
+        </>
+      )}
       {!!searchResult?.length && (
         <>
-          <h3 className="text-center">Results</h3>
-          <h3>Users</h3>
-          <div className="flex flex-row gap-4 overflow-x-scroll">
-            {searchResult?.map((user: ISearchResult) => (
-              <User
-                user={user?.node}
-                onUserClick={handleUserClick}
-                key={user?.node?.id}
-              />
+          <div className="flex flex-col items-start gap-4 mb-8">
+            {searchResult?.map((user: ISearchResult, index: number) => (
+              <>
+                <User
+                  user={user?.node}
+                  onUserClick={handleUserClick}
+                  key={user?.node?.id}
+                />
+                {index !== searchResult.length - 1 && (
+                  <hr className="w-full border-gray-400 dark:border-gray-800 opacity-10 dark:opacity-30" />
+                )}
+              </>
             ))}
           </div>
         </>
       )}
-    </>
+    </div>
   );
 };
 

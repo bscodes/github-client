@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { IUserRepositories } from '../../redux/slices/features/search/searchSlice';
+import { IUserRepositories } from '@/redux/slices/features/search/searchSlice';
 
 interface IRepoProps {
   repo: IUserRepositories;
