@@ -1,4 +1,4 @@
-import { DocumentNode, gql } from '@apollo/client';
+import { type DocumentNode, gql } from '@apollo/client';
 
 export const SEARCH_USERS: DocumentNode = gql`
   query ($searchQuery: String!) {
@@ -11,26 +11,7 @@ export const SEARCH_USERS: DocumentNode = gql`
         node {
           ... on User {
             id
-            repositories(first: 20) {
-              edges {
-                node {
-                  name
-                  watchers {
-                    totalCount
-                  }
-                  stargazers {
-                    totalCount
-                  }
-                  id
-                  owner {
-                    ... on User {
-                      id
-                      login
-                      name
-                    }
-                  }
-                }
-              }
+            repositories {
               totalCount
             }
             starredRepositories {
