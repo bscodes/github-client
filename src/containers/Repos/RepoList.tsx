@@ -1,4 +1,5 @@
 import { GET_USER_REPOSITORIES } from '@/api/api';
+import HorizontalLine from '@/components/HorizontalLine/HorizontalLine';
 import Loading from '@/components/Loading/Loading';
 import Repo from '@/components/Repo/Repo';
 import {
@@ -43,7 +44,7 @@ const RepoList: FC = () => {
   }, [data, dispatch]);
 
   return (
-    <div className="mx-auto px-6 md:px-10">
+    <div className="mx-auto px-6 md:px-10 mb-8">
       <Loading loading={!repoState.repoList?.length && l1} />
       {error && <h3 className="text-center">{error?.message}</h3>}
       {!!repoState.repoList?.length && !l1 && (
@@ -51,12 +52,15 @@ const RepoList: FC = () => {
           <h3 className="font-thin mb-9">{gitHubUserName}'s Repositories</h3>
           <hr className="w-full border-gray-400 dark:border-gray-800 opacity-10 dark:opacity-30 mb-8" />
 
-          {repoState.repoList.map((repo: IRepoList) => (
-            <Repo
-              repo={repo}
-              repoDetailPageUrl={`/repo?owner=${gitHubUserName}&name=${repo?.node?.id}`}
-              key={repo?.node?.id}
-            />
+          {repoState.repoList.map((repo: IRepoList, index: number, arr) => (
+            <>
+              <Repo
+                repo={repo}
+                repoDetailPageUrl={`/repo?owner=${gitHubUserName}&name=${repo?.node?.name}`}
+                key={repo?.node?.id}
+              />
+              <HorizontalLine index={index} arr={arr} />
+            </>
           ))}
         </>
       )}

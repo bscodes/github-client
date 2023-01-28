@@ -9,6 +9,7 @@ import {
   setUserRepositories,
 } from '@/redux/slices/features/search/searchSlice';
 import Loading from '@/components/Loading/Loading';
+import HorizontalLine from '@/components/HorizontalLine/HorizontalLine';
 
 const UserList: FC = () => {
   const searchState = useAppSelector(searchSelector);
@@ -27,25 +28,19 @@ const UserList: FC = () => {
     <div className="mx-auto px-6 md:px-10">
       <Loading loading={loading} />
       {error && <h3 className="text-center">{error?.message}</h3>}
-      {searchResult?.length && (
+      {!!searchResult?.length && !loading && (
         <>
           <h3 className="font-thin mb-9">{searchResult?.length} users</h3>
           <hr className="w-full border-gray-400 dark:border-gray-800 opacity-10 dark:opacity-30 mb-8" />
-        </>
-      )}
-      {!!searchResult?.length && (
-        <>
           <div className="flex flex-col items-start gap-4 mb-8">
-            {searchResult?.map((user: ISearchResult, index: number) => (
+            {searchResult?.map((user: ISearchResult, index: number, arr) => (
               <>
                 <User
                   user={user?.node}
                   onUserClick={handleUserClick}
                   key={user?.node?.id}
                 />
-                {index !== searchResult.length - 1 && (
-                  <hr className="w-full border-gray-400 dark:border-gray-800 opacity-10 dark:opacity-30" />
-                )}
+                <HorizontalLine index={index} arr={arr} />
               </>
             ))}
           </div>
