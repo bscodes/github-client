@@ -2,6 +2,14 @@
 
 ## Built with React & TypeScript & Apollo Client & GitHub GraphQL API
 
+### Search GitHub users, explore their repos, create issues
+
+<img src="./src/assets/images/mainPage.jpg" alt="Main Page Screenshot" width="400px" />
+
+<img src="./src/assets/images/searchResult.jpg" alt="Main Page Screenshot" width="400px" />
+
+<img src="./src/assets/images/repoList.jpg" alt="Main Page Screenshot" width="400px" />
+
 ## Getting Started
 
 Get your Github creadentials by using [this guide](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
