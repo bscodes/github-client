@@ -1,5 +1,11 @@
+import UserRepos from '@/containers/User/UserRepos';
+
 const User: React.FC = () => {
-  return <div>User page</div>;
+  return (
+    <>
+      <UserRepos />
+    </>
+  );
 };
 
 export default User;

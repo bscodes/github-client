@@ -46,6 +46,32 @@ export const SEARCH_USERS: DocumentNode = gql`
   }
 `;
 
+export const GET_USER_REPOSITORIES: DocumentNode = gql`
+  query ($owner: String!) {
+    user(login: $owner) {
+      repositories(first: 100) {
+        edges {
+          node {
+            id
+            name
+            description
+            url
+            stargazers {
+              totalCount
+            }
+            forks {
+              totalCount
+            }
+            primaryLanguage {
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 export const GET_REPO: DocumentNode = gql`
   query ($owner: String!, $name: String!) {
     repositoryOwner(login: $owner) {

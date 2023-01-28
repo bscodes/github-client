@@ -11,7 +11,6 @@ import {
   setUserRepositories,
 } from '@/redux/slices/features/search/searchSlice';
 import { useAppDispatch } from '@/utils/hooks/typedSelectors';
-import RepoList from '../Repos/RepoList';
 import UserList from '../User/UserList';
 
 const SearcResults: React.FC = () => {
@@ -61,7 +60,6 @@ const SearcResults: React.FC = () => {
   return (
     <>
       <UserList />
-      <RepoList />
     </>
   );
 };

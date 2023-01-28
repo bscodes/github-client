@@ -1,13 +1,14 @@
 import { FC } from 'react';
-import { IUserRepositories } from '@/redux/slices/features/search/searchSlice';
+
+import type { RepoList } from '@/redux/slices/features/repo/repoSlice';
 
 interface IRepoProps {
-  repo: IUserRepositories;
+  repo: RepoList;
   onClick: (name: string | null) => void;
 }
 
 const Repo: FC<IRepoProps> = ({ repo, onClick }) => {
-  const { name, stargazers, watchers } = repo?.node;
+  const { name, stargazers, description, primaryLanguage, forks } = repo?.node;
 
   return (
     <div
@@ -19,8 +20,10 @@ const Repo: FC<IRepoProps> = ({ repo, onClick }) => {
       </div>
       <div className="ml-auto">
         <h4>
-          {stargazers.totalCount} Stars - {watchers.totalCount} Watching
+          {stargazers.totalCount} Stars - {forks.totalCount} Forks
         </h4>
+        <h4>{description} description</h4>
+        <h4>{primaryLanguage?.name} primaryLanguage</h4>
       </div>
     </div>
   );
