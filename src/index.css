@@ -1,7 +1,185 @@
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap');
+
+html.dark {
+  background-color: #343437;
+  color: #fff;
+}
 
 body {
   font-family: 'Roboto', sans-serif;
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+html.dark input {
+  color-scheme: dark;
+}
+
+.pattern-bg {
+  height: 70vh;
+  box-shadow: 0px 113px 40px -40px rgba(255, 255, 255, 0.86) inset,
+    0px -114px 40px -40px rgba(255, 255, 255, 0.96) inset;
+
+  background-color: #e9e9eb;
+  opacity: 1;
+  background-image: linear-gradient(
+      30deg,
+      #fdfdff 12%,
+      transparent 12.5%,
+      transparent 87%,
+      #fdfdff 87.5%,
+      #fdfdff
+    ),
+    linear-gradient(
+      150deg,
+      #fdfdff 12%,
+      transparent 12.5%,
+      transparent 87%,
+      #fdfdff 87.5%,
+      #fdfdff
+    ),
+    linear-gradient(
+      30deg,
+      #fdfdff 12%,
+      transparent 12.5%,
+      transparent 87%,
+      #fdfdff 87.5%,
+      #fdfdff
+    ),
+    linear-gradient(
+      150deg,
+      #fdfdff 12%,
+      transparent 12.5%,
+      transparent 87%,
+      #fdfdff 87.5%,
+      #fdfdff
+    ),
+    linear-gradient(
+      60deg,
+      #fdfdff77 25%,
+      transparent 25.5%,
+      transparent 75%,
+      #fdfdff77 75%,
+      #fdfdff77
+    ),
+    linear-gradient(
+      60deg,
+      #fdfdff77 25%,
+      transparent 25.5%,
+      transparent 75%,
+      #fdfdff77 75%,
+      #fdfdff77
+    );
+  background-size: 38px 67px;
+  background-position: 0 0, 0 0, 19px 33px, 19px 33px, 0 0, 19px 33px;
+}
+
+html.dark .pattern-bg {
+  background-color: #29282b;
+  box-shadow: 0px -58px 47px -10px rgba(52, 52, 55, 0.67) inset,
+    0px 56px 47px -10px rgba(52, 52, 55, 0.67) inset;
+
+  opacity: 1;
+  background-image: linear-gradient(
+      30deg,
+      #343437 12%,
+      transparent 12.5%,
+      transparent 87%,
+      #343437 87.5%,
+      #343437
+    ),
+    linear-gradient(
+      150deg,
+      #343437 12%,
+      transparent 12.5%,
+      transparent 87%,
+      #343437 87.5%,
+      #343437
+    ),
+    linear-gradient(
+      30deg,
+      #343437 12%,
+      transparent 12.5%,
+      transparent 87%,
+      #343437 87.5%,
+      #343437
+    ),
+    linear-gradient(
+      150deg,
+      #343437 12%,
+      transparent 12.5%,
+      transparent 87%,
+      #343437 87.5%,
+      #343437
+    ),
+    linear-gradient(
+      60deg,
+      #34343777 25%,
+      transparent 25.5%,
+      transparent 75%,
+      #34343777 75%,
+      #34343777
+    ),
+    linear-gradient(
+      60deg,
+      #34343777 25%,
+      transparent 25.5%,
+      transparent 75%,
+      #34343777 75%,
+      #34343777
+    );
+  background-size: 36px 63px;
+  background-position: 0 0, 0 0, 18px 32px, 18px 32px, 0 0, 18px 32px;
+}
+
+.react-tabs {
+  display: flex;
+}
+
+.react-tabs__tab-list {
+  display: flex;
+  flex-direction: column;
+  width: 170px;
+  margin: 0;
+  padding: 0;
+}
+
+.react-tabs__tab {
+  list-style: none;
+  border-bottom: 0.1px solid #e5e5e5;
+  cursor: pointer;
+}
+
+.dark .react-tabs__tab {
+  border-bottom: 0.1px solid #29282b;
+}
+
+.react-tabs__tab--selected {
+  border-left: 4px solid #6eb800;
+}
+
+.react-tabs__tab-panel {
+  display: none;
+}
+
+.react-tabs__tab-panel--selected {
+  display: block;
+}
+
+.react-tabs__tab {
+  padding-left: 24px;
+}
+
+.react-tabs__tab--selected {
+  padding-left: 21px;
 }

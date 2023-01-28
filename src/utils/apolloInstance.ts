@@ -3,12 +3,13 @@ import {
   ApolloLink,
   HttpLink,
   InMemoryCache,
+  NextLink,
   Operation,
 } from '@apollo/client';
 
 const httpLink = new HttpLink({ uri: process.env.REACT_APP_API_BASEURL });
 
-const authLink = new ApolloLink((operation: Operation, forward) => {
+const authLink = new ApolloLink((operation: Operation, forward: NextLink) => {
   operation.setContext({
     headers: {
       authorization: `Bearer ${process.env.REACT_APP_GITHUB_ACCESS_TOKEN}`,

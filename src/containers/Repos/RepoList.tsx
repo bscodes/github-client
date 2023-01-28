@@ -1,34 +1,70 @@
-import { FC } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Repo from '../../components/Repo/Repo';
-import { useAppSelector } from '../../utils/hooks/typedSelectors';
+import { GET_USER_REPOSITORIES } from '@/api/api';
+import HorizontalLine from '@/components/HorizontalLine/HorizontalLine';
+import Loading from '@/components/Loading/Loading';
+import Repo from '@/components/Repo/Repo';
 import {
-  IUserRepositories,
-  searchSelector,
-} from '../../redux/slices/features/search/searchSlice';
+  repoSelector,
+  setRepoList,
+  type RepoList as IRepoList,
+} from '@/redux/slices/features/repo/repoSlice';
+import { useAppDispatch, useAppSelector } from '@/utils/hooks/typedSelectors';
+import { useLazyQuery } from '@apollo/client';
+import { FC, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const RepoList: FC = () => {
-  const searchState = useAppSelector(searchSelector);
-  const navigate = useNavigate();
-  const { userRepositories, selectedUser } = searchState;
+  const dispatch = useAppDispatch();
+  const [getRepoList, { loading: l1, data, error }] = useLazyQuery(
+    GET_USER_REPOSITORIES
+  );
+  const location = useLocation();
+  const gitHubUserName = location.pathname.slice(1);
+  const repoState = useAppSelector(repoSelector);
 
-  const handleRouter = (name: string | null) => {
-    navigate(`/repo?owner=${selectedUser}&name=${name}`);
-  };
+  useEffect(() => {
+    if (gitHubUserName) {
+      getRepoList({
+        variables: {
+          owner: gitHubUserName,
+        },
+      });
+    }
+  }, [gitHubUserName, getRepoList]);
+
+  useEffect(() => {
+    const repositories = data?.user?.repositories?.edges;
+
+    if (data && repositories) {
+      dispatch(setRepoList(repositories));
+    }
+
+    return () => {
+      dispatch(setRepoList([]));
+    };
+  }, [data, dispatch]);
 
   return (
-    <>
-      {userRepositories?.length ? (
+    <div className="mx-auto px-6 md:px-10 mb-8">
+      <Loading loading={!repoState.repoList?.length && l1} />
+      {error && <h3 className="text-center">{error?.message}</h3>}
+      {!!repoState.repoList?.length && !l1 && (
         <>
-          <h3 className="mb-2">Users Repositories</h3>
-          {userRepositories.map((repo: IUserRepositories) => (
-            <Repo repo={repo} onClick={handleRouter} key={repo?.node?.id} />
+          <h3 className="font-thin mb-9">{gitHubUserName}'s Repositories</h3>
+          <hr className="w-full border-gray-400 dark:border-gray-800 opacity-10 dark:opacity-30 mb-8" />
+
+          {repoState.repoList.map((repo: IRepoList, index: number, arr) => (
+            <>
+              <Repo
+                repo={repo}
+                repoDetailPageUrl={`/repo?owner=${gitHubUserName}&name=${repo?.node?.name}`}
+                key={repo?.node?.id}
+              />
+              <HorizontalLine index={index} arr={arr} />
+            </>
           ))}
         </>
-      ) : (
-        <></>
       )}
-    </>
+    </div>
   );
 };
 

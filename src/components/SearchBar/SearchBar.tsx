@@ -1,33 +1,38 @@
 import React, { ChangeEvent, FC, FormEvent } from 'react';
+import { BiSearchAlt } from 'react-icons/bi';
 
 interface ISearchBarProps {
   onSearch: (e: FormEvent<HTMLFormElement>) => void;
   searchQuery: string;
   onInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  size: 'large' | 'small';
 }
 
 const SearchBar: FC<ISearchBarProps> = ({
   onSearch,
   searchQuery,
   onInputChange,
+  size,
 }) => {
   return (
-    <form onSubmit={onSearch} className="mx-auto w-1/3 flex">
+    <form onSubmit={onSearch} className="flex relative">
+      <div
+        className={`absolute ${
+          size === 'large' ? 'md:top-3' : 'md:top-2'
+        } top-5 left-3 scale-50 h-4`}
+      >
+        <BiSearchAlt color="#717079" className="text-2xl md:text-base" />
+      </div>
       <input
         id="user"
         type="text"
-        className="w-full h-8 px-2 rounded-none border-black border"
+        className={`w-full h-14 ${
+          size === 'large' ? 'md:h-8' : 'md:h-fit'
+        } pl-12 md:pl-8 pr-2 rounded-2xl md:rounded-xl border-solid dark:border-lightdark dark:bg-lightdark text-2xl md:text-base dark:text-white`}
         value={searchQuery}
         onChange={onInputChange}
-        placeholder="Search users..."
+        placeholder="Search"
       />
-      <button
-        type="submit"
-        className="bg-sky-500 border-none px-3 h-9 text-white cursor-pointer"
-        disabled={!searchQuery.length}
-      >
-        Search
-      </button>
     </form>
   );
 };

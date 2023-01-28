@@ -1,18 +1,15 @@
 import { useLazyQuery, useMutation } from '@apollo/client';
 import { ChangeEvent, useEffect, useState } from 'react';
-import { CREATE_ISSUE, GET_REPO } from '../../api/api';
-import Issue from '../../components/Issue/Issue';
+import { CREATE_ISSUE, GET_REPO } from '@/api/api';
+import Issue from '@/components/Issue/Issue';
 import Modal from 'react-modal';
 import {
   IIssue,
   repoSelector,
   setRepoDetail,
-} from '../../redux/slices/features/repo/repoSlice';
-import {
-  useAppDispatch,
-  useAppSelector,
-} from '../../utils/hooks/typedSelectors';
-import useQuery from '../../utils/hooks/useQuery';
+} from '@/redux/slices/features/repo/repoSlice';
+import { useAppDispatch, useAppSelector } from '@/utils/hooks/typedSelectors';
+import useQuery from '@/utils/hooks/useQuery';
 
 const customStyles = {
   content: {

@@ -1,4 +1,4 @@
-import { DocumentNode, gql } from '@apollo/client';
+import { type DocumentNode, gql } from '@apollo/client';
 
 export const SEARCH_USERS: DocumentNode = gql`
   query ($searchQuery: String!) {
@@ -11,26 +11,7 @@ export const SEARCH_USERS: DocumentNode = gql`
         node {
           ... on User {
             id
-            repositories(first: 20) {
-              edges {
-                node {
-                  name
-                  watchers {
-                    totalCount
-                  }
-                  stargazers {
-                    totalCount
-                  }
-                  id
-                  owner {
-                    ... on User {
-                      id
-                      login
-                      name
-                    }
-                  }
-                }
-              }
+            repositories {
               totalCount
             }
             starredRepositories {
@@ -39,6 +20,38 @@ export const SEARCH_USERS: DocumentNode = gql`
             name
             login
             avatarUrl(size: 120)
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const GET_USER_REPOSITORIES: DocumentNode = gql`
+  query ($owner: String!) {
+    user(login: $owner) {
+      repositories(first: 100) {
+        edges {
+          node {
+            id
+            name
+            description
+            url
+            owner {
+              login
+              ... on User {
+                name
+              }
+            }
+            stargazers {
+              totalCount
+            }
+            forks {
+              totalCount
+            }
+            primaryLanguage {
+              name
+            }
           }
         }
       }

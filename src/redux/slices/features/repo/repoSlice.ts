@@ -1,10 +1,10 @@
+import { RootState } from '@/redux/store';
 import {
   createSlice,
   PayloadAction,
   Slice,
   SliceCaseReducers,
 } from '@reduxjs/toolkit';
-import { RootState } from '../../../store';
 
 export interface IIssue {
   createdAt: string;
@@ -13,6 +13,28 @@ export interface IIssue {
   author: {
     login: string;
     name: string;
+  };
+}
+
+export interface RepoList {
+  node: {
+    id: string;
+    description: string;
+    forks: {
+      totalCount: number;
+    };
+    name: string;
+    owner: {
+      login: string;
+      name: string;
+    };
+    primaryLanguage: {
+      name: string;
+    };
+    stargazers: {
+      totalCount: number;
+    };
+    url: string;
   };
 }
 
@@ -31,12 +53,14 @@ export interface IRepoDetail {
 
 interface RepoState {
   repoDetail: IRepoDetail | null;
+  repoList: RepoList[] | [];
 }
 
 type TRepoSlice = Slice<RepoState, SliceCaseReducers<RepoState>, 'repo'>;
 
 const initialState: RepoState = {
   repoDetail: null,
+  repoList: [],
 };
 
 export const repoSlice: TRepoSlice = createSlice({
@@ -52,10 +76,16 @@ export const repoSlice: TRepoSlice = createSlice({
         repoDetail: action.payload,
       };
     },
+    setRepoList: (state: RepoState, action: PayloadAction<RepoList[] | []>) => {
+      return {
+        ...state,
+        repoList: action.payload,
+      };
+    },
   },
 });
 
-export const { setRepoDetail } = repoSlice.actions;
+export const { setRepoDetail, setRepoList } = repoSlice.actions;
 export const repoReducerName = repoSlice.name;
 export const repoReducer = repoSlice.reducer;
 export const repoSelector = (state: RootState) => state[repoSlice.name];
