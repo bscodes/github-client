@@ -24,6 +24,10 @@ export interface RepoList {
       totalCount: number;
     };
     name: string;
+    owner: {
+      login: string;
+      name: string;
+    };
     primaryLanguage: {
       name: string;
     };

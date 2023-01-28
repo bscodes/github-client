@@ -8,6 +8,7 @@ import {
   setSelectedUser,
   setUserRepositories,
 } from '@/redux/slices/features/search/searchSlice';
+import Loading from '@/components/Loading/Loading';
 
 const UserList: FC = () => {
   const searchState = useAppSelector(searchSelector);
@@ -24,7 +25,7 @@ const UserList: FC = () => {
 
   return (
     <div className="mx-auto px-6 md:px-10">
-      {loading && <h3 className="text-center">Loading...</h3>}
+      <Loading loading={loading} />
       {error && <h3 className="text-center">{error?.message}</h3>}
       {searchResult?.length && (
         <>

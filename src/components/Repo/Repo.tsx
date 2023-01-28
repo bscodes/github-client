@@ -1,22 +1,22 @@
 import { FC } from 'react';
 
 import type { RepoList } from '@/redux/slices/features/repo/repoSlice';
+import { Link } from 'react-router-dom';
 
 interface IRepoProps {
   repo: RepoList;
-  onClick: (name: string | null) => void;
+  repoDetailPageUrl: string;
 }
 
-const Repo: FC<IRepoProps> = ({ repo, onClick }) => {
+const Repo: FC<IRepoProps> = ({ repo, repoDetailPageUrl }) => {
   const { name, stargazers, description, primaryLanguage, forks } = repo?.node;
 
   return (
-    <div
-      className="flex cursor-pointer hover:bg-yellow-50 px-3 rounded-lg"
-      onClick={() => onClick(name)}
-    >
+    <div className="flex hover:bg-yellow-50 px-3 rounded-lg">
       <div className="mr-auto">
-        <h3>{name}</h3>
+        <Link to={repoDetailPageUrl} className="no-underline text-blue-600">
+          <h3>{name}</h3>
+        </Link>
       </div>
       <div className="ml-auto">
         <h4>

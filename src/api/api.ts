@@ -56,6 +56,12 @@ export const GET_USER_REPOSITORIES: DocumentNode = gql`
             name
             description
             url
+            owner {
+              login
+              ... on User {
+                name
+              }
+            }
             stargazers {
               totalCount
             }
